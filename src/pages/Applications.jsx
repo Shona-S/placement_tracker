@@ -20,10 +20,19 @@ export default function Applications() {
 
     useEffect(() => {
         if (currentUser) {
-            const unsubscribe = getUserApplications(currentUser.uid, (data) => {
+            const listCallback = (data) => {
                 setApplications(data);
                 setFilteredApps(data);
-            });
+            };
+
+            listCallback.onError = (error) => {
+                console.error("Subscription error:", error);
+                if (error.code === 'failed-precondition' && error.message.includes('index')) {
+                    alert("Missing Index: check console for the link to create it!");
+                }
+            };
+
+            const unsubscribe = getUserApplications(currentUser.uid, listCallback);
             return unsubscribe;
         }
     }, [currentUser]);

@@ -27,6 +27,9 @@ export function getUserApplications(userId, callback) {
             ...doc.data()
         }));
         callback(data);
+    }, (error) => {
+        console.error("Firestore Error:", error);
+        if (callback.onError) callback.onError(error);
     });
 }
 
