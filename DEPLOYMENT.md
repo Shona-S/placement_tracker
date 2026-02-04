@@ -7,6 +7,22 @@ Your project is already configured for deployment to Netlify.
 - **Publish Directory:** `dist`
 - **Routing:** SPA redirects are configured in `netlify.toml`.
 
+## Environment Variables (CRITICAL)
+Your application connects to Firebase, so you **must** add these environment variables in Netlify for it to work.
+
+1.  Go to **Site configuration** > **Environment variables**.
+2.  Click **Add a variable** > **Import from a .env file** (or add them one by one).
+3.  Add the following keys (copy values from your local `.env` file):
+
+    - `VITE_FIREBASE_API_KEY`
+    - `VITE_FIREBASE_AUTH_DOMAIN`
+    - `VITE_FIREBASE_PROJECT_ID`
+    - `VITE_FIREBASE_STORAGE_BUCKET`
+    - `VITE_FIREBASE_MESSAGING_SENDER_ID`
+    - `VITE_FIREBASE_APP_ID`
+
+**After adding these variables, you MUST trigger a new deployment** (go to Deploys > Trigger deploy > Deploy site).
+
 ## Option 1: Deploy via Git (Recommended)
 This method establishes Continuous Deployment (CD), so your site updates automatically when you push to GitHub/GitLab/Bitbucket.
 
