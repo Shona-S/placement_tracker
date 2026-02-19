@@ -1,15 +1,19 @@
 :root {
   /* Dark Theme Palette */
   --bg-primary: #0a0a0a;
-  --bg-secondary: #171717; /* Neutral-900 */
-  --bg-tertiary: #262626; /* Neutral-800 */
-  
+  --bg-secondary: #171717;
+  /* Neutral-900 */
+  --bg-tertiary: #262626;
+  /* Neutral-800 */
+
   --text-primary: #ededed;
   --text-secondary: #a3a3a3;
   --text-muted: #525252;
 
-  --accent-primary: #06b6d4; /* Cyan-500 */
-  --accent-secondary: #8b5cf6; /* Violet-500 */
+  --accent-primary: #06b6d4;
+  /* Cyan-500 */
+  --accent-secondary: #8b5cf6;
+  /* Violet-500 */
   --accent-hover: #0891b2;
 
   --border-light: #262626;
@@ -33,7 +37,7 @@
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  
+
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -68,13 +72,16 @@ a {
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: var(--bg-primary);
 }
+
 ::-webkit-scrollbar-thumb {
   background: var(--bg-tertiary);
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-secondary);
 }
@@ -88,6 +95,7 @@ a {
 
 .text-gradient {
   background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -128,4 +136,60 @@ a {
 .input-field:focus {
   border-color: var(--accent-primary);
   box-shadow: 0 0 0 1px var(--accent-primary);
+}
+
+/* Responsive Utilities */
+.desktop-only {
+  display: flex !important;
+}
+
+.mobile-only {
+  display: none !important;
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 64px;
+  /* Height of header */
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 64px);
+  background-color: var(--bg-primary);
+  padding: 1rem;
+  z-index: 49;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mobile-menu-overlay.open {
+  transform: translateX(0);
+}
+
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none !important;
+  }
+
+  .mobile-only {
+    display: flex !important;
+  }
+
+  /* Adjust container padding for mobile */
+  .container {
+    padding: 0 1rem;
+  }
+
+  /* Make cards use full width on mobile if needed, though they are usually responsive by default */
+  .card {
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 1.75rem !important;
+  }
 }
