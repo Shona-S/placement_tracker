@@ -173,7 +173,7 @@ export default function Applications() {
                             {/* Notes section if exists */}
                             {app.notes && (
                                 <div style={{ backgroundColor: 'var(--bg-primary)', padding: '0.75rem', borderRadius: 'var(--radius-md)', fontSize: '0.875rem', marginTop: '0.5rem' }}>
-                                    <p style={{ color: 'var(--text-secondary)', fontStyle: 'italic', whiteSpace: 'pre-wrap' }}>"{app.notes}"</p>
+                                    <p className="notes-text" style={{ color: 'var(--text-secondary)', fontStyle: 'italic' }}>{app.notes}</p>
                                 </div>
                             )}
 

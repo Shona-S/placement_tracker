@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
-import { Mail, ArrowLeft, checkCircle, AlertCircle } from 'lucide-react';
+import { Mail, ArrowLeft, CheckCircle, AlertCircle } from 'lucide-react';
 
 export default function ForgotPassword() {
     const [email, setEmail] = useState('');
@@ -62,8 +62,8 @@ export default function ForgotPassword() {
                         alignItems: 'center',
                         gap: '0.5rem'
                     }}>
-                        {/* checkCircle is usually CheckCircle in lucide */}
-                        <AlertCircle size={20} style={{ transform: 'rotate(180deg)' }} />
+                        {/* CheckCircle from lucide */}
+                        <CheckCircle size={20} style={{ transform: 'rotate(180deg)' }} />
                         {message}
                     </div>
                 )}

@@ -193,3 +193,9 @@ a {
     font-size: 1.75rem !important;
   }
 }
+
+/* Notes Styling */
+.notes-text {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}

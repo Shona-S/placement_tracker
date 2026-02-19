@@ -57,7 +57,6 @@ export function AuthProvider({ children }) {
         currentUser,
         signup,
         login,
-        login,
         logout,
         resetPassword,
         confirmThePasswordReset

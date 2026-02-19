@@ -29,6 +29,7 @@ export default function ApplicationForm({ initialData, onSubmit, onCancel, loadi
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log("Submitting Form Data:", formData); // Debug: Check notes for \n
         onSubmit(formData);
     };
 
