@@ -1,26 +1,27 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { Link, useNavigate } from 'react-router-dom';
-import { LogIn, AlertCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Mail, ArrowLeft, checkCircle, AlertCircle } from 'lucide-react';
 
-export default function Login() {
+export default function ForgotPassword() {
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [message, setMessage] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    const { login } = useAuth();
-    const navigate = useNavigate();
+    const { resetPassword } = useAuth();
 
     async function handleSubmit(e) {
         e.preventDefault();
 
         try {
+            setMessage('');
             setError('');
             setLoading(true);
-            await login(email, password);
-            navigate('/');
-        } catch {
-            setError('Failed to log in. Please check your credentials.');
+            await resetPassword(email);
+            setMessage('Check your inbox for further instructions.');
+        } catch (err) {
+            console.error(err);
+            setError('Failed to reset password. Please check if the email is correct.');
         }
 
         setLoading(false);
@@ -30,8 +31,8 @@ export default function Login() {
         <div className="container" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <div className="card" style={{ maxWidth: '400px', width: '100%', backdropFilter: 'blur(12px)' }}>
                 <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                    <h2 className="text-gradient" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>Welcome Back</h2>
-                    <p style={{ color: 'var(--text-secondary)' }}>Continue your placement success story</p>
+                    <h2 className="text-gradient" style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>Reset Password</h2>
+                    <p style={{ color: 'var(--text-secondary)' }}>Enter your email to receive a reset link</p>
                 </div>
 
                 {error && (
@@ -50,6 +51,23 @@ export default function Login() {
                     </div>
                 )}
 
+                {message && (
+                    <div style={{
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        color: 'var(--success)',
+                        padding: '1rem',
+                        borderRadius: 'var(--radius-md)',
+                        marginBottom: '1rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem'
+                    }}>
+                        {/* checkCircle is usually CheckCircle in lucide */}
+                        <AlertCircle size={20} style={{ transform: 'rotate(180deg)' }} />
+                        {message}
+                    </div>
+                )}
+
                 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                     <div>
                         <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>Email</label>
@@ -62,28 +80,18 @@ export default function Login() {
                             placeholder="you@example.com"
                         />
                     </div>
-                    <div>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                            <label style={{ color: 'var(--text-secondary)' }}>Password</label>
-                            <Link to="/forgot-password" style={{ fontSize: '0.875rem', color: 'var(--accent-primary)' }}>Forgot Password?</Link>
-                        </div>
-                        <input
-                            type="password"
-                            className="input-field"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                            placeholder="••••••••"
-                        />
-                    </div>
+
                     <button disabled={loading} className="btn-primary" type="submit" style={{ marginTop: '1rem', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.5rem' }}>
-                        <LogIn size={20} />
-                        Log In
+                        <Mail size={20} />
+                        Send Reset Link
                     </button>
                 </form>
 
                 <div style={{ marginTop: '1.5rem', textAlign: 'center', color: 'var(--text-secondary)' }}>
-                    Need an account? <Link to="/signup" style={{ color: 'var(--accent-primary)', fontWeight: '500' }}>Sign Up</Link>
+                    <Link to="/login" style={{ color: 'var(--accent-primary)', fontWeight: '500', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <ArrowLeft size={16} />
+                        Back to Login
+                    </Link>
                 </div>
             </div>
         </div>

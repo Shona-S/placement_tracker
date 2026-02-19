@@ -3,7 +3,9 @@ import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     signOut,
-    onAuthStateChanged
+    onAuthStateChanged,
+    sendPasswordResetEmail,
+    confirmPasswordReset
 } from 'firebase/auth';
 import { auth, isConfigured } from '../firebase';
 
@@ -29,6 +31,14 @@ export function AuthProvider({ children }) {
         return signOut(auth);
     }
 
+    function resetPassword(email) {
+        return sendPasswordResetEmail(auth, email);
+    }
+
+    function confirmThePasswordReset(oobCode, newPassword) {
+        return confirmPasswordReset(auth, oobCode, newPassword);
+    }
+
     useEffect(() => {
         if (!isConfigured) {
             setLoading(false);
@@ -47,7 +57,10 @@ export function AuthProvider({ children }) {
         currentUser,
         signup,
         login,
-        logout
+        login,
+        logout,
+        resetPassword,
+        confirmThePasswordReset
     };
 
     return (
