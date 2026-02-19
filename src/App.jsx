@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard';
 import Applications from './pages/Applications';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+import ProgressTracker from './pages/ProgressTracker';
 
 function SetupScreen() {
   return (
@@ -59,6 +60,11 @@ function App() {
             <Route path="/applications" element={
               <PrivateRoute>
                 <Applications />
+              </PrivateRoute>
+            } />
+            <Route path="/progress" element={
+              <PrivateRoute>
+                <ProgressTracker />
               </PrivateRoute>
             } />
 

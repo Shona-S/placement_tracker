@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { LayoutDashboard, Briefcase, LogOut, User, Menu, X } from 'lucide-react';
+import { LayoutDashboard, Briefcase, LogOut, User, Menu, X, TrendingUp } from 'lucide-react';
 
 export default function Layout({ children }) {
     const { logout, currentUser } = useAuth();
@@ -26,6 +26,7 @@ export default function Layout({ children }) {
     const navItems = [
         { label: 'Dashboard', path: '/', icon: <LayoutDashboard size={20} /> },
         { label: 'Applications', path: '/applications', icon: <Briefcase size={20} /> },
+        { label: 'Progress', path: '/progress', icon: <TrendingUp size={20} /> },
     ];
 
     return (
